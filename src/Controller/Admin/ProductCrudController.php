@@ -34,10 +34,11 @@ class ProductCrudController extends AbstractCrudController
         return [
             TextField::new('name'),
             SlugField::new('slug')->setTargetFieldName('name'),
-            ImageField::new('illustration')->setUploadDir('public/uploads'),
+            ImageField::new('illustration')->setBasePath('uploads/')->setUploadDir('public/uploads/')
+            ->setUploadedFileNamePattern('[ramdomhash].[extension]')->setRequired('false'),
             TextField::new('subtitle'),
             TextareaField::new('description'),
-         //   BooleanField::new('isBest'),
+            //BooleanField::new('isBest'),
             MoneyField::new('price')->setCurrency('EUR'),
             AssociationField::new('category')
 
