@@ -22,12 +22,7 @@ class ProductCrudController extends AbstractCrudController
         return Product::class;
     }
 
-    public function configureActions(Actions $actions): Actions
-    {
-        return $actions->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
-            return $action->setLabel('Créer un produit');
-        });
-    }
+  
 
     public function configureFields(string $pageName): iterable
     {
@@ -35,7 +30,7 @@ class ProductCrudController extends AbstractCrudController
             TextField::new('name'),
             SlugField::new('slug')->setTargetFieldName('name'),
             ImageField::new('illustration')->setBasePath('uploads/')->setUploadDir('public/uploads/')
-            ->setUploadedFileNamePattern('[ramdomhash].[extension]')->setRequired('false'),
+            ->setUploadedFileNamePattern('[ramdomhash].[extension]')->setRequired(false),
             TextField::new('subtitle'),
             TextareaField::new('description'),
             //BooleanField::new('isBest'),
