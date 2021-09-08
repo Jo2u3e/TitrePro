@@ -2,23 +2,38 @@
 
 {% block title %}Nos Produits{% endblock %}
 
+
 {% block content %}
 
    <h2> Nos Produits </h2>
-
+<!--
    <div class="row">  
          
          {% for product in products %}
            <div class="col-md-4">
-                <div class="product-item">
-                <img src="/uploads/{{product.illustration}}" alt="" width="250 px" height="250 px"   >
-                    <h5>  {{product.name}} </h5>
-                    <span>  {{product.subtitle}}  </span>
-
-                {{product.price}}
-                </div>
+                  <div class="product-item text-center">
+                    <img src="/uploads/{{product.illustration}}" alt="" width="250 px" height="250 px"   >
+                    <h5 >  {{product.name}} </h5>
+                    <span class="product-subtitle">  {{product.subtitle}} </span>
+                    <span class="product-price"> {{product.price}} </span>
+                  </div>
            </div>
          {% endfor %}
+   </div>
+-->
+
+   <div class="row">
+      {% for product in products %}
+        <div class="card product-item text-center" style="width: 18rem;">
+              <img src="/uploads/{{product.illustration}}" class="card-img-top" alt="..." width="250 px" height="250 px" >
+           <div class="card-body">
+              <h5 class="card-title"> {{product.name}} </h5>
+              <span class="card-text product-subtitle ">{{product.subtitle}}</span>
+              <span class="product-price"> {{product.price}} </span>
+           </div>
+       </div>
+
+      {% endfor %}
    </div>
 
    
