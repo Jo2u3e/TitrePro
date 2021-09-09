@@ -5,7 +5,7 @@
 
 {% block content %}
 
-   <h2> Nos Produits </h2>
+   
 <!--
    <div class="row">  
          
@@ -23,6 +23,15 @@
 -->
 
 <div class="row">
+     <div class="col-md-2">
+         <h2> Filtrer </h2>
+         {{form(form)}}
+     </div>
+     <div class="col-md-10">
+
+     <h2> Nos Produits </h2>
+     
+          <div class="row">
       {% for product in products %}
         <div class="card product-item text-center" style="width: 18rem;">
           <a href=" {{path('product', {'slug' : product.slug}) }} ">  <img src="/uploads/{{product.illustration}}" class="card-img-top" alt="..." width="250 px" height="250 px" >  <a/>
@@ -35,6 +44,10 @@
 
       {% endfor %}
    </div>
+     </div>
+</div>
+
+
 
    
 

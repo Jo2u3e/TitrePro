@@ -1,17 +1,20 @@
 
+body {
+    position: relative;
+}
+
 .navbar-item-custom, .navbar-item-custom a {
     color: #fff;
 }
 
 .footer-custom {
     text-align: center;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     width: 100%;
     background-color: #343a40;
     color: #fff;
-    padding-top: 10px;
-    height: 55px;
+    padding-top: 20px;
 
 }
 
@@ -35,8 +38,18 @@
 }
 
 .card{
-    margin-right: 90px;
+    
+    margin-right: 25px;
     margin-bottom: 50px;
     box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
     height: 370px;
+}
+
+.price-single{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+h2 {
+    font-weight: bold;
 }
