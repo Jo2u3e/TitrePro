@@ -19,7 +19,21 @@
        Pour ajouter une adresse veuillez <a href="{{path('account_address_add')}}"> cliquer ici </a>
     </p>
      {% else %}
-         VUE DE MES ADRESSES 
+          <div class="row">
+        {% for address in app.user.addresses %}
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">  
+                <div class="card-body">
+                    <h5 class="card-title">{{address.name}}</h5>
+                    <p class="card-text">
+                    {{address.address}} <br> {{address.postal}} {{address.city}} <br> {{address.country}}
+                    </p>
+                    <a href="{{ path('account_address_edit', {id:address.id}) }}">Modifier</a> | <a href="{{ path('account_address_delete', {id:address.id}) }}">Supprimer</a>
+                </div>
+            </div>
+        </div>            
+        {% endfor %}
+    </div>
 
   {% endif %} 
 
