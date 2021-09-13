@@ -34,7 +34,7 @@ class Carrier
 
     public function __toString()
     {
-        return sprintf("%s [br] %s [br] %s €", $this->getName(), $this->getDescription(), number_format($this->getPrice()/100,2,',',' '));
+        return sprintf("%s [br] %s [br] %s €", $this->getName(), $this->getDescription(), number_format($this->getPrice(),2,',',' '));
     }
 
     public function getId(): ?int

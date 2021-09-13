@@ -29,6 +29,9 @@ class OrderController extends AbstractController
     public function index(Cart $cart): Response
     {
 
+         // if(!$this->getUser()->getAddresses()->getValues()){
+        //     return $this->redirectToRoute('account_address_add');
+        // }
        
         $form = $this->createForm(OrderType::class, null, [
             'user' => $this->getUser()
