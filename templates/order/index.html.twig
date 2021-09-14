@@ -19,7 +19,7 @@
 		</div>
 		<div class="col-md-6">
 			<div class="text-center">
-				<h4>Récapitulatif de votre commande</h4>
+				<h4 class="mb-4">Récapitulatif de votre commande</h4>
 			</div>
 			<div class="order-summary">
 				{% for key, product in cart %}
@@ -32,8 +32,7 @@
 							<small>{{product.product.subtitle}}</small>
 						</div>
 						<div class="col-2 my-auto">
-							<p>x
-								{{product.quantity}}</p>
+							<p>x {{product.quantity}}</p>
 						</div>
 					</div>
 				{% endfor %}
