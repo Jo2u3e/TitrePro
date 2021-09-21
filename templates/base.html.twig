@@ -9,6 +9,10 @@
     <meta name="generator" content="Jekyll v4.1.1">
     <title> {% block title %} La boutique {% endblock %} </title>
 
+    {% block javascript %}
+
+    {% endblock %}
+
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     
@@ -146,4 +150,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="{{asset('assets/js/bootstrap.bundle.js')}}"></script>
 </body>
+
+{% block script %}
+
+{% endblock %}
 </html>
