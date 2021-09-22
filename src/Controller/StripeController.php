@@ -16,14 +16,14 @@ use Doctrine\ORM\EntityManagerInterface;
 class StripeController extends AbstractController
 {
     #[Route('/commande/create-session', name: 'stripe_create_session')]
-    public function index(Cart $cart, $reference, EntityManagerInterface $em): Response
+    public function index(Cart $cart, $reference, EntityManagerInterface $entityManager): Response
     {
         
         $productsForStripe = [];
         (new Dotenv())->bootEnv(dirname(__DIR__).'/../.env');
         $DOMAIN = $_ENV['DOMAIN'];
 
-        $order = $em->getRepository(Order::class)->findOneByReference($reference);
+        $order = $entityManager->getRepository(Order::class)->findOneByReference($reference);
 
         if(!$order){
             return new JsonResponse(['error' => 'order']);
@@ -37,7 +37,7 @@ class StripeController extends AbstractController
                     'unit_amount' => $product->getPrice(),
                     'product_data' => [
                         'name' => $product->getProduct(),
-                        'images' => [sprintf('%s/uploads/%s', $DOMAIN, $em->getRepository(Product::class)->findOneByName($product->getProduct())->getIllustration())],
+                        'images' => [sprintf('%s/uploads/%s', $DOMAIN, $entityManager->getRepository(Product::class)->findOneByName($product->getProduct())->getIllustration())],
                     ],
                 ],
                 'quantity' => $product->getQuantity(),
@@ -67,7 +67,7 @@ class StripeController extends AbstractController
         ]);
 
         $order->setStripeSessionID($checkout_session->id);
-        $em->flush();
+        $entityManager->flush();
 
         return new JsonResponse(['id' => $checkout_session->id]);
     }

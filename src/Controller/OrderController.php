@@ -87,7 +87,7 @@ class OrderController extends AbstractController
             $order = new Order();
             $order->setReference(sprintf('%s-%s', $dayDate->format('dmY'), uniqid()))
                 ->setUser($this->getUser())
-                ->setCreatedAt($dayDate)
+                ->setCreateAt($dayDate)
                 ->setCarrierName($carrier->getName())
                 ->setCarrierPrice($carrier->getPrice())
                 ->setDelivery($delivery_address)
