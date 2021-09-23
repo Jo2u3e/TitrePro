@@ -48,6 +48,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
+          
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href=" {{ path('products') }} ">Produits</a>
@@ -58,8 +59,9 @@
                  <li class="nav-item active">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
-             
             </ul>
+
+
             <div class="navbar-item-custom">
                   {% if app.user %}
                      <a href="{{ path('account') }}"> Mon Compte <small> ({{app.user.firstname}})</small> </a> | <a href="{{ path('app_logout') }}"> Deconnexion </a>

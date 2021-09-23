@@ -33,7 +33,8 @@ class OrderCrudController extends AbstractCrudController
             IdField::new('id'),
             DateField::new('createdAt', 'Passée le'),
             TextField::new('user.getFullName', 'Utilisateur'),
-            MoneyField::new('total')->setCurrency('EUR'),
+            MoneyField::new('total', 'Total produit')->setCurrency('EUR'),
+            MoneyField::new('carrierPrice', 'Frais de port')->setCurrency('EUR'),
             BooleanField::new('isPaid', 'Payée')
         ];
     }
