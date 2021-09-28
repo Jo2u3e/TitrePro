@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-
+use App\Class\Mail;
 use App\Class\Cart;
 use App\Entity\Order;
 use Doctrine\ORM\EntityManagerInterface;
@@ -37,11 +37,11 @@ class OrderSuccessController extends AbstractController
             $cart->remove();
 
             $mail = new Mail();
-            $content = sprintf('Bonjour %s <br> Merci pour votre commande.', $order->getUser()->getFirstName());
+            $content = 'Bonjour'. getUser()->getFirstName(). ' <br> Merci pour votre commande..';
             $mail->send(
                 $order->getUser()->getEmail(),
-                sprintf('%s %s', $order->getUser()->getFirstName(), $order->getUser()->getLastName()),
-                'Commande validée - "La boutique"',
+                $order->getUser()->getFirstName(), $order->getUser()->getLastName(),
+                'Commande validée - "Gwada Boutik"',
                 $content
             );
         }

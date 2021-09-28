@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Class\Mail;
 use App\Entity\User;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,21 +30,42 @@ class RegisterController extends AbstractController
 
         $user = new User();
         $form = $this->createForm(type: RegisterType::class);
+        $notification = null;
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
             $user = $form->getData();
-            $password = $encoder->encodePassword($user,$user->getPassword());
-            $user->setPassword($password);
+
+            $search_email = $this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
+
+            if ($search_email){
+                $notification = 'Cette adresse mail existe déjà !';
+            } else{
+                $password = $encoder->encodePassword($user,$user->getPassword());
+                $user->setPassword($password);
+               
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
+
+                $mail = new Mail();
+                $content = 'Bonjour  <br> Merci pour votre inscription '. $user->getFirstName();
+                $mail->send(
+                    $user->getEmail(),
+                    $user->getFirstName(), $user->getLastName(),
+                    'Bienvenue sur le site "Gwada Boutik"',
+                    $content
+                );
+
+                $notification = 'Félicitation ! Vous êtes désormais inscrit !';
+            }
            
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
         }
 
         return $this->render('register/index.html.twig', [
             'controller_name' => 'RegisterController',
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'notification' => $notification
         ]);
     }
 }

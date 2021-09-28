@@ -39,8 +39,8 @@ class RegisterType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'Adresse mail',
                 'constraints' => new Length([
-                    'min' => 6,
-                    'max' => 60]),
+                    'min' => 5,
+                    'max' => 75]),
                 'attr' => [
                     'placeholder' => 'Votre adresse mail'
                 ]
