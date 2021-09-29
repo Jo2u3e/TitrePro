@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-
+use App\Entity\OrderDetails;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,7 +47,7 @@ class OrderController extends AbstractController
      
 
     
-    #[Route('/commande/recapitulatif', name: 'order_recap')]
+    #[Route('/commande/recapitulatif', name: 'order_recap', methods:'POST')]
     public function add(Cart $cart, Request $request): Response
     {
 
@@ -75,17 +75,16 @@ class OrderController extends AbstractController
             //     $delivery->getCountry()
             // );
 
-            $delivery_address = sprintf(
-                '%s %s <br> %s <br> %s %s',
-                $delivery->getFirstName(),
-                $delivery->getLastname(),
-                $delivery->getAddress(),
-                $delivery->getPostal(),
-                $delivery->getCity()
-            );
+            $delivery_address =  
+                $delivery->getFirstName().
+                $delivery->getLastname().
+                $delivery->getAddress().
+                $delivery->getPostal().
+                $delivery->getCity();
+            
             $dayDate = new \DateTime();
             $order = new Order();
-            $order->setReference(sprintf('%s-%s', $dayDate->format('dmY'), uniqid()))
+            $order->setReference($dayDate->format('dmY').uniqid())
                 ->setUser($this->getUser())
                 ->setCreateAt($dayDate)
                 ->setCarrierName($carrier->getName())

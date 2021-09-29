@@ -82,12 +82,13 @@
 
 {% block script %}
 	<script type="text/javascript">
-		const stripe = Stripe("sk_test_51JbnQcKr8GgznZLd4G0XdSfrQAoRl1j2Du1t6ikQPKovj0eQ3ucvdgFT1f0quMov7fz2pnELbsnj1cOl51rP7HIn008VxjZRpw");
+		const stripe = Stripe("pk_test_51JbnQcKr8GgznZLdEfyycZ0lEjReq1CtFP0Cw58g7HeAKCOQA5k3mult6nbMafwRFFkWQdr30CNeJPZOCerGb2sq00sWhUTcxb");
 		const checkoutButton = document.getElementById("checkout-button");
 		checkoutButton.addEventListener("click", function () {
 			fetch("/commande/create-session/{{reference}}", {method: "POST"})
 				.then(function (response) {
-					return response.json();})
+					return response.json();
+					})
 				.then(function (session) {
 					if(session.error === 'order'){
 						windows.location.replace('{{path('order')}}')
@@ -96,9 +97,11 @@
 				.then(function (result) {
 					if (result.error) {
 						alert(result.error.message);
-					}})
+					}
+					})
 				.catch(function (error) {
-					console.error("Error:", error);});
+					console.error("Error:", error);
+					});
 		});
 	</script>
 {% endblock %}

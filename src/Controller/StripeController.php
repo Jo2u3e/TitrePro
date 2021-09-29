@@ -12,16 +12,21 @@ use App\Entity\Product;
 use Stripe\Checkout\Session;
 use Symfony\Component\Dotenv\Dotenv;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class StripeController extends AbstractController
 {
-    #[Route('/commande/create-session', name: 'stripe_create_session')]
+    #[Route('/commande/create-session/{reference}', name: 'stripe_create_session', methods:"POST")]
     public function index(Cart $cart, $reference, EntityManagerInterface $entityManager): Response
     {
         
+
+        $YOUR_DOMAIN = 'http://127.0.0.1:8000';
+
+
         $productsForStripe = [];
-        (new Dotenv())->bootEnv(dirname(__DIR__).'/../.env');
-        $DOMAIN = $_ENV['DOMAIN'];
+        //(new Dotenv())->bootEnv(dirname(__DIR__).'/../.env');
+      //  $DOMAIN = $_ENV['DOMAIN'];
 
         $order = $entityManager->getRepository(Order::class)->findOneByReference($reference);
 
@@ -37,7 +42,7 @@ class StripeController extends AbstractController
                     'unit_amount' => $product->getPrice(),
                     'product_data' => [
                         'name' => $product->getProduct(),
-                        'images' => [sprintf('%s/uploads/%s', $DOMAIN, $entityManager->getRepository(Product::class)->findOneByName($product->getProduct())->getIllustration())],
+                        'images' => [$YOUR_DOMAIN.'/uploads/'. $entityManager->getRepository(Product::class)->findOneByName($product->getProduct())->getIllustration()],
                     ],
                 ],
                 'quantity' => $product->getQuantity(),
@@ -55,19 +60,22 @@ class StripeController extends AbstractController
             'quantity' => 1,
         ];
 
-        Stripe::setApiKey('sk_test_51JbnQcKr8GgznZLd4G0XdSfrQAoRl1j2Du1t6ikQPKovj0eQ3ucvdgFT1f0quMov7fz2pnELbsnj1cOl51rP7HIn008VxjZRpw');
+        Stripe::setApiKey('pk_test_51JbnQcKr8GgznZLdEfyycZ0lEjReq1CtFP0Cw58g7HeAKCOQA5k3mult6nbMafwRFFkWQdr30CNeJPZOCerGb2sq00sWhUTcxb');
 
         $checkout_session = Session::create([
             'customer_email' =>$this->getUser()->getEmail(),
             'payment_method_types' => ['card'],
             'line_items' => [$productsForStripe],
             'mode' => 'payment',
-            'success_url' => $DOMAIN . '/commande/merci/{CHECKOUT_SESSION_ID}',
-            'cancel_url' => $DOMAIN . '/commande/erreur/{CHECKOUT_SESSION_ID}',
+            'success_url' => $YOUR_DOMAIN . '/commande/merci/{CHECKOUT_SESSION_ID}',
+            'cancel_url' => $YOUR_DOMAIN . '/commande/erreur/{CHECKOUT_SESSION_ID}',
         ]);
 
         $order->setStripeSessionID($checkout_session->id);
         $entityManager->flush();
+
+
+        
 
         return new JsonResponse(['id' => $checkout_session->id]);
     }
