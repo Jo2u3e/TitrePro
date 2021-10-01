@@ -16,7 +16,7 @@
 	{% elseif order.state == 3 %}
 		Livraison en cours					
 	{% endif %}<br>
-	<strong>Commande passé le :</strong> {{order.createdAt |date('d-m-Y')}}<br>
+	<strong>Commande passé le :</strong> {{order.createAt |date('d-m-Y')}}<br>
 	<strong>Référence de ma commande :</strong> {{order.reference}}<br>
 	<strong>Transporteur choisi :</strong> {{order.carrierName}} <br>
 	<hr>

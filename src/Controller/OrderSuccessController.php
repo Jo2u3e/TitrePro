@@ -37,7 +37,7 @@ class OrderSuccessController extends AbstractController
             $cart->remove();
 
             $mail = new Mail();
-            $content = 'Bonjour'. getUser()->getFirstName(). ' <br> Merci pour votre commande..';
+            $content = 'Bonjour'.$order->getUser()->getFirstName().'<br> Merci pour votre commande..';
             $mail->send(
                 $order->getUser()->getEmail(),
                 $order->getUser()->getFirstName(), $order->getUser()->getLastName(),

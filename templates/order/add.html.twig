@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block javascript %}
+ <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
 	<script src="https://js.stripe.com/v3/"></script>
 {% endblock %}
 
@@ -85,15 +86,15 @@
 		const stripe = Stripe("pk_test_51JbnQcKr8GgznZLdEfyycZ0lEjReq1CtFP0Cw58g7HeAKCOQA5k3mult6nbMafwRFFkWQdr30CNeJPZOCerGb2sq00sWhUTcxb");
 		const checkoutButton = document.getElementById("checkout-button");
 		checkoutButton.addEventListener("click", function () {
-			fetch("/commande/create-session/{{reference}}", {method: "POST"})
+			fetch("/commande/create-session/{{reference}}", {
+			     	method:"POST",
+				})
 				.then(function (response) {
 					return response.json();
 					})
 				.then(function (session) {
-					if(session.error === 'order'){
-						windows.location.replace('{{path('order')}}')
-					}
-					return stripe.redirectToCheckout({sessionId: session.id});})
+                       	return stripe.redirectToCheckout({sessionId: session.id});
+				})
 				.then(function (result) {
 					if (result.error) {
 						alert(result.error.message);

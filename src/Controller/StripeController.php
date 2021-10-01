@@ -21,7 +21,7 @@ class StripeController extends AbstractController
     {
         
 
-        $YOUR_DOMAIN = 'http://127.0.0.1:8000';
+        $YOUR_DOMAIN = 'http://localhost:8000';
 
 
         $productsForStripe = [];
@@ -60,7 +60,7 @@ class StripeController extends AbstractController
             'quantity' => 1,
         ];
 
-        Stripe::setApiKey('pk_test_51JbnQcKr8GgznZLdEfyycZ0lEjReq1CtFP0Cw58g7HeAKCOQA5k3mult6nbMafwRFFkWQdr30CNeJPZOCerGb2sq00sWhUTcxb');
+        Stripe::setApiKey('sk_test_51JbnQcKr8GgznZLd4G0XdSfrQAoRl1j2Du1t6ikQPKovj0eQ3ucvdgFT1f0quMov7fz2pnELbsnj1cOl51rP7HIn008VxjZRpw');
 
         $checkout_session = Session::create([
             'customer_email' =>$this->getUser()->getEmail(),
@@ -77,6 +77,6 @@ class StripeController extends AbstractController
 
         
 
-        return new JsonResponse(['id' => $checkout_session->id]);
+        return $this->json(['id' => $checkout_session->id]);
     }
 }
