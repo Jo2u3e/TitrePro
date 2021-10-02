@@ -4,19 +4,13 @@ namespace App\Class;
 
 use Mailjet\Client;
 use Mailjet\Resources;
-use Symfony\Component\Dotenv\Dotenv;
+
 
 class Mail
 {
-    private $api_key;
-    private $api_key_secret;
+    private $api_key = '1b3c3d6059995cf52c31f32160173534';
+    private $api_key_secret = 'ac93c3fdf507ebc9a34783d0ff4e31c9';
 
-    public function __construct()
-    {
-        (new Dotenv())->bootEnv(dirname(__DIR__) . '/../.env');
-        $this->api_key = $_ENV['API_KEY'];
-        $this->api_key_secret = $_ENV['API_KEY_SECRET'];
-    }
 
     public function send($to_email, $to_name, $subject, $content)
     {
