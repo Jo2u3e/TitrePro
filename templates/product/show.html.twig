@@ -12,7 +12,7 @@
               <img src="/uploads/{{product.illustration}}" alt="{{product.name}}" class="img-fluid">
         </div>
         <div class="col-md-8"> 
-            <h2> {{product.name}} </h2>
+            <h3> {{product.name}} </h3>
             <p> {{product.subtitle}}  </p>
             <span class="price-single">  {{ (product.price/100)|number_format(2) }}€ </span>
             <hr>
@@ -20,6 +20,19 @@
             <a href="{{ path('add_to_cart',{id:product.id}) }}" class="btn btn-primary"> Ajouter au panier </a>
         </div>
     </div>
+
+    <hr>
+
+    <h3 class="text-center"> Nouvelle Collection </h3>
+<p class="text-center"> Decouvrez nos nouveaux T-Shirt </p>
+ <!-- Three columns of text below the carousel -->
+        <div class="row">
+               {% for product in bestProducts %}
+                   <div class="col-md-3"> 
+                       {% include 'product/single-product.html.twig' %}
+                   </div>
+               {% endfor %}
+        </div><!-- /.row -->
    
 
 

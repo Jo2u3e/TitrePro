@@ -50,6 +50,8 @@ class ProductController extends AbstractController
     #[Route('/produit/{slug}', name: 'product')]
     public function show($slug)
     {
+
+        $bestProducts = $this->entityManager->getRepository(Product::class)->findByIsBest(true);
         
         $product = $this->entityManager->getRepository(Product::class)->findOneBySlug($slug);
 
@@ -58,7 +60,8 @@ class ProductController extends AbstractController
         }
 
         return $this->render('product/show.html.twig', [
-            'product' => $product
+            'product' => $product,
+            'bestProducts' => $bestProducts
         ]);
     }
 
