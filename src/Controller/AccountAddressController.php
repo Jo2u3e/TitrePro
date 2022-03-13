@@ -9,7 +9,7 @@ use App\Form\AddressType;
 use App\Entity\Address;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Cart;
+use App\Class\Cart;
 
 
 class AccountAddressController extends AbstractController
@@ -43,9 +43,9 @@ class AccountAddressController extends AbstractController
             $this->entityManager->persist($address);
             $this->entityManager->flush();
             if ($cart->get()){
-                return $this->redirectToRoute('');
-            }else {
                 return $this->redirectToRoute('order');
+            }else {
+                return $this->redirectToRoute('account_address');
             }
             
         }

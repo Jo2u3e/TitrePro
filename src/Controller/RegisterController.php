@@ -58,6 +58,7 @@ class RegisterController extends AbstractController
                 );
 
                 $notification = 'Félicitation ! Vous êtes désormais inscrit !';
+                return $this->redirectToRoute('app_login');
             }
            
         }

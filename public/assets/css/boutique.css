@@ -4,6 +4,8 @@ body {
     min-height: 100vh;
 }
 
+
+
 .navbar-item-custom, .navbar-item-custom a {
     color: #fff;
 }
@@ -11,10 +13,12 @@ body {
 .footer-custom {
     text-align: center;
     position: absolute;
+    bottom: -120px;
     width: 100%;
     background-color: #343a40;
     color: #fff;
-    padding-top: 20px;
+    padding-top: 10px;
+    height: 85px;
 
 }
 
@@ -32,6 +36,10 @@ body {
     
 }
 
+.no-style-hover a:hover {
+    text-decoration: none;
+  }
+
 .product-item .product-price{
     font-size: 14px;
     font-weight: bold;
@@ -39,8 +47,8 @@ body {
 
 .card{
     
-    margin-right: 25px;
-    margin-bottom: 50px;
+    margin-left: 20px;
+    margin-bottom: 40px;
     box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
     height: 370px;
 }
@@ -74,3 +82,52 @@ h2 {
     padding: 20px;
     margin-top: 22px;
 }
+
+
+@media (min-width: 381px)  {
+      .card{
+        /* margin-left: 100px;  */
+        margin: auto;
+        margin-bottom: 35px;
+    }
+
+    #nos-produits{
+          display: flex;
+          justify-content: center;
+    }
+
+   
+
+}
+
+
+@media (max-width: 380px) {
+    .card{
+      /* margin-left: 42px; */
+       margin: auto;
+       margin-bottom: 35px;
+  }
+
+}
+
+
+@media (min-width: 760px) {
+   
+    .card{
+      /* margin-left: 12px; */
+       margin: auto;
+       margin-bottom: 35px;
+    }
+
+}
+
+
+@media (min-width: 1020px) and (max-width: 1050) {
+.card {
+     margin: auto;
+     margin-bottom: 35px;
+   /*  margin-left: 60px;  */
+}
+
+}
+

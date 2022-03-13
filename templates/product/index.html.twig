@@ -6,21 +6,7 @@
 {% block content %}
 
    
-<!--
-   <div class="row">  
-         
-         {% for product in products %}
-           <div class="col-md-4">
-                  <div class="product-item text-center">
-                    <img src="/uploads/{{product.illustration}}" alt="" width="250 px" height="250 px"   >
-                    <h5 >  {{product.name}} </h5>
-                    <span class="product-subtitle">  {{product.subtitle}} </span>
-                    <span class="product-price"> {{product.price}} </span>
-                  </div>
-           </div>
-         {% endfor %}
-   </div>
--->
+
 
 <div class="row">
      <div class="col-md-2">
@@ -29,7 +15,7 @@
      </div>
      <div class="col-md-10">
 
-     <h2> Nos Produits </h2>
+     <h2 id="nos-produits" class="text-center"> Nos Produits </h2>
      
     <div class="row">
       {% for product in products %}
